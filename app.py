@@ -11,7 +11,7 @@ import requests
 app = Flask(__name__)
 
 def check(email):
-    url = "https://unjcv3mr4h.execute-api.ap-south-1.amazonaws.com/plasma/getdata?email="+email
+    url = "https://gtv96bsex4.execute-api.ap-south-1.amazonaws.com/plasma/getdata?email="+email
     status = requests.request("GET",url)
     print(status.json())
     return status.json()
@@ -28,7 +28,7 @@ def register():
     params = "name="+x[0]+"&email="+x[1]+"&phone="+x[2]+"&city="+x[3]+"&infect="+x[4]+"&blood="+x[5]+"&password="+x[6]
     
     if('errorType' in check(x[1])):
-        url = "https://unjcv3mr4h.execute-api.ap-south-1.amazonaws.com/plasma/registration?"+params
+        url = "https://gtv96bsex4.execute-api.ap-south-1.amazonaws.com/plasma/registration?"+params
         response = requests.get(url)
         return render_template('register.html', pred="Registration Successful, please login using your details")
     else:
@@ -56,7 +56,7 @@ def loginpage():
         
 @app.route('/stats')
 def stats():
-    url = "https://unjcv3mr4h.execute-api.ap-south-1.amazonaws.com/plasma/getbloodgroupsdata"
+    url = "https://gtv96bsex4.execute-api.ap-south-1.amazonaws.com/plasma/getbloodgroupsdata"
     response = requests.get(url)
     r = response.json()
     print(r)
@@ -71,7 +71,7 @@ def requester():
 def requested():
     bloodgrp = request.form['bloodgrp']     
     #print(bloodgrp)
-    url = "https://unjcv3mr4h.execute-api.ap-south-1.amazonaws.com/plasma/requestonbloodgroup?blood="+bloodgrp
+    url = "https://gtv96bsex4.execute-api.ap-south-1.amazonaws.com/plasma/requestonbloodgroup?blood="+bloodgrp
     status = requests.request("GET",url)
     a=status.json()
     print(a)
@@ -88,5 +88,5 @@ def requested():
      
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080)
+    app.run(debug=True)
 
